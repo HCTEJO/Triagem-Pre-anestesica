@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triagem Pré-Anestésica — CUF Tejo</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal:#006B6B; --tl:#E6F4F4; --tm:#CCE9E9; --td:#004F4F;
+  --red:#C0392B; --rl:#FDECEA; --green:#2E7D52; --gl:#EAFAF1;
+  --text:#1A1A2E; --muted:#6B7280; --border:#D1E8E8;
+  --bg:#F5FAFA; --white:#fff; --r:12px;
+  --serif:"DM Serif Display",Georgia,serif;
+  --sans:"DM Sans",system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);padding-bottom:60px}
+header{background:var(--teal);color:white;padding:28px 24px 24px;overflow:hidden;position:relative}
+header::after{content:"";position:absolute;bottom:-30px;right:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.06)}
+.hl{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:6px}
+header h1{font-family:var(--serif);font-size:clamp(20px,5vw,28px);font-weight:400;line-height:1.2;margin-bottom:8px}
+header p{font-size:13px;opacity:.82;line-height:1.55;max-width:460px}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.card{background:var(--white);border-radius:var(--r);box-shadow:0 2px 16px rgba(0,107,107,.10);padding:22px;margin-top:18px;border:1px solid var(--border)}
+.ct{font-family:var(--serif);font-size:17px;color:var(--td);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:500px){.fr{grid-template-columns:1fr}}
+.f{display:flex;flex-direction:column;gap:5px}
+.f label{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
+.f input,.f select{border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-family:var(--sans);font-size:14px;color:var(--text);background:var(--white);transition:border-color .2s;-webkit-appearance:none;width:100%}
+.f input:focus,.f select:focus{outline:none;border-color:var(--teal)}
+.ff{grid-column:1/-1}
+.q{margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--tl)}
+.q:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.ql{font-size:13px;font-weight:600;color:var(--td);margin-bottom:4px}
+.qt{font-size:13px;line-height:1.6;color:var(--text);margin-bottom:10px}
+.qt ul{margin:6px 0 0 16px}.qt li{margin-bottom:2px}
+.qh{font-size:11px;color:var(--muted);font-style:italic;margin-bottom:10px}
+.rg{display:flex;gap:10px}
+.rb{flex:1}.rb input[type=radio]{display:none}
+.rb label{display:block;text-align:center;padding:10px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;transition:all .15s;color:var(--muted);background:var(--white)}
+.rb input:checked+label.sim{background:var(--rl);border-color:var(--red);color:var(--red)}
+.rb input:checked+label.nao{background:var(--gl);border-color:var(--green);color:var(--green)}
+.rb label:hover{border-color:var(--teal)}
+#sm{display:none;margin-top:18px}
+.mtw{overflow-x:auto;margin:14px -4px 0;padding:0 4px}
+table{width:100%;border-collapse:separate;border-spacing:0;min-width:520px}
+thead th{background:var(--tl);color:var(--td);font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;padding:9px 8px;text-align:center;border-bottom:2px solid var(--tm)}
+thead th:first-child{text-align:left;border-radius:8px 0 0 0}
+thead th:nth-child(2){text-align:left}
+thead th:last-child{border-radius:0 8px 0 0;width:40px}
+tbody tr:hover{background:#f8fefe}
+tbody td{padding:5px;border-bottom:1px solid #EEF6F6;vertical-align:middle}
+tbody td:first-child{min-width:150px}tbody td:nth-child(2){min-width:75px}
+td input[type=text]{width:100%;border:1.5px solid var(--border);border-radius:7px;padding:7px 9px;font-family:var(--sans);font-size:12px;color:var(--text);background:var(--white);transition:border-color .2s}
+td input[type=text]:focus{outline:none;border-color:var(--teal);background:var(--tl)}
+td input[type=text]::placeholder{color:#B0C4C4;font-style:italic}
+.cc{text-align:center}
+.cc input[type=checkbox]{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:2px solid var(--border);border-radius:5px;cursor:pointer;transition:all .15s;position:relative;display:inline-block;vertical-align:middle;background:var(--white)}
+.cc input[type=checkbox]:checked{background:var(--teal);border-color:var(--teal)}
+.cc input[type=checkbox]:checked::after{content:"";position:absolute;left:4px;top:1px;width:7px;height:11px;border:2.5px solid white;border-top:none;border-left:none;transform:rotate(45deg)}
+.brm{background:none;border:none;color:#CBD5D5;cursor:pointer;padding:3px;border-radius:5px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;transition:all .15s;margin:0 auto}
+.brm:hover{background:#FEE2E2;color:var(--red)}
+.ba{display:flex;align-items:center;gap:7px;background:var(--tl);color:var(--td);border:1.5px dashed var(--teal);border-radius:8px;padding:8px 14px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;margin-top:12px}
+.ba:hover{background:var(--tm)}
+.nota{background:var(--tl);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:11px 13px;font-size:13px;color:var(--td);line-height:1.55}
+.rgpd{background:var(--white);border-radius:var(--r);box-shadow:0 2px 16px rgba(0,107,107,.10);padding:18px 22px;margin-top:18px;border-left:4px solid var(--teal);font-size:12px;line-height:1.7;color:var(--muted)}
+.bs{width:100%;background:var(--teal);color:white;border:none;border-radius:var(--r);padding:15px;font-family:var(--sans);font-size:16px;font-weight:600;cursor:pointer;transition:all .2s;margin-top:22px;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 4px 14px rgba(0,107,107,.25)}
+.bs:hover:not(:disabled){background:var(--td);transform:translateY(-1px)}
+.bs:disabled{background:#9DBDBD;cursor:not-allowed;box-shadow:none}
+.sp{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.4);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.msg{display:none;border-radius:var(--r);padding:20px 24px;margin-top:20px;font-size:14px;line-height:1.6}
+.ok{background:var(--gl);border:1.5px solid #6EE7B7;color:var(--green)}
+.ok strong{display:block;font-size:16px;margin-bottom:6px}
+.er{background:var(--rl);border:1.5px solid #FECACA;color:var(--red)}
+.er strong{display:block;font-size:15px;margin-bottom:6px}
+.loading{text-align:center;padding:60px 20px;color:var(--muted)}
+.loading .sp{display:inline-block;border-color:rgba(0,107,107,.3);border-top-color:var(--teal);margin-bottom:16px}
+footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;padding:0 16px;line-height:1.6}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="hl">Anestesiologia · CUF Tejo</div>
+    <h1>Triagem Pré-Anestésica</h1>
+    <p>Exames Especiais e procedimentos anestésicos fora do Bloco Operatório.<br>Preencha antes do seu exame.</p>
+  </div>
+</header>
+
+<div class="wrap" id="mainWrap">
+  <!-- Conteúdo injectado por JS -->
+  <div class="loading" id="loadingState">
+    <div class="sp" style="width:32px;height:32px;border-width:3px"></div>
+    <p>A verificar o seu link...</p>
+  </div>
+</div>
+
+<footer><p>Anestesiologia · Hospital CUF Tejo · Dados utilizados exclusivamente para fins clínicos</p></footer>
+
+<script>
+// ── CONFIGURAÇÃO ──────────────────────────────────────────────────────────
+var APPS_SCRIPT_URL = 'COLOCA_AQUI_O_URL_DO_APPS_SCRIPT';
+// ─────────────────────────────────────────────────────────────────────────
+
+// Ler parâmetros do URL
+var params  = new URLSearchParams(window.location.search);
+var TOKEN   = params.get('token')  || '';
+var HCIS    = params.get('hcis')   || '';
+var EXAME   = params.get('exame')  || '';
+
+// ── Validar token ao carregar ─────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', function() {
+  if (!TOKEN) {
+    mostrarErro('Link inválido', 'Este link não é válido. Por favor contacte o serviço para solicitar um novo questionário.');
+    return;
+  }
+  fetch(APPS_SCRIPT_URL + '?action=validateToken&token=' + encodeURIComponent(TOKEN))
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.valido) {
+        construirFormulario();
+      } else {
+        mostrarErro('Questionário indisponível', data.motivo || 'Este link não é válido ou já foi utilizado.');
+      }
+    })
+    .catch(function() {
+      mostrarErro('Erro de ligação', 'Não foi possível verificar o link. Verifique a sua ligação à internet e tente novamente.');
+    });
+});
+
+// ── Construir formulário ──────────────────────────────────────────────────
+function construirFormulario() {
+  var wrap = document.getElementById('mainWrap');
+
+  var optGastro = '<option value="Gastrenterologia"' + (EXAME==='Gastrenterologia'?' selected':'') + '>Gastrenterologia</option>';
+  var optPneumo = '<option value="Pneumologia"'      + (EXAME==='Pneumologia'     ?' selected':'') + '>Pneumologia</option>';
+  var optImage  = '<option value="Imagiologia"'      + (EXAME==='Imagiologia'     ?' selected':'') + '>Imagiologia</option>';
+  var selectExame = '<select id="tex"' + (EXAME ? ' disabled style="background:#f0f0f0;cursor:not-allowed"' : '') + '>'
+    + '<option value="">-- Selecione --</option>' + optGastro + optPneumo + optImage + '</select>';
+
+  wrap.innerHTML = '\
+  <div class="rgpd">\
+    <p style="margin-bottom:10px">A CUF é responsável pelo tratamento dos dados pessoais recolhidos neste formulário de forma estritamente confidencial e utilizada exclusivamente para esta finalidade, sendo a recolha, registo, organização e consulta dos dados efetuada de acordo com as mais estritas regras de segurança e confidencialidade, sem qualquer partilha com entidades externas.</p>\
+    <p style="margin-bottom:10px">Os dados clínicos obtidos neste questionário vão ser registados no seu processo clínico, para a continuação da prestação segura de cuidados de saúde, sendo estes registo de conservação permanente de acordo com a legislação em vigor.</p>\
+    <p>Nos termos da lei, é-lhe garantido o direito de pedir o acesso, a retificação, a eliminação, a limitação ou a oposição ao tratamento dos seus dados, contactando o Encarregado de Proteção de Dados em <a href="https://www.cuf.pt/contactos" target="_blank" style="color:var(--teal)">https://www.cuf.pt/contactos</a> — Assunto: Proteção de dados.</p>\
+  </div>\
+  <div class="card"><div class="ct">Identificação</div>\
+    <div class="fr"><div class="f ff"><label>Nome completo *</label><input type="text" id="nome" placeholder="Nome e apelido" autocomplete="name"></div></div>\
+    <div class="fr">\
+      <div class="f"><label>HCIS *</label><input type="text" id="hcis" value="' + HCIS + '"' + (HCIS ? ' readonly style="background:#f0f0f0;cursor:not-allowed"' : '') + '></div>\
+      <div class="f"><label>Data de nascimento *</label><input type="date" id="nasc"></div>\
+    </div>\
+    <div class="fr">\
+      <div class="f"><label>Data do exame</label><input type="date" id="dex"></div>\
+      <div class="f"><label>Tipo de exame</label>' + selectExame + '</div>\
+    </div>\
+    <div class="fr"><div class="f ff"><label>Contacto telefónico</label><input type="text" id="tel" placeholder="Para agendamento de consulta, se necessário"></div></div>\
+  </div>\
+  <div class="card"><div class="ct">Questões de Triagem</div>\
+    <div class="q"><div class="ql">Q1 — Doença cardíaca ou respiratória grave</div>\
+      <div class="qt">Tem alguma das seguintes situações?<ul>\
+        <li>Insuficiência cardíaca com limitação para actividades do dia-a-dia</li>\
+        <li>Enfarte do miocárdio nos últimos 6 meses</li>\
+        <li>Arritmia cardíaca grave ou mal controlada (excluindo fibrilação auricular estável)</li>\
+        <li>Angina instável</li>\
+        <li>DPOC com oxigenoterapia ou fibrose pulmonar</li>\
+        <li>Hipertensão pulmonar</li>\
+        <li>Pacemaker ou cardiodesfibrilhador implantado que necessite de ser desactivado antes de procedimentos</li>\
+      </ul></div>\
+      <div class="qh">Base: RCRI + ASA Physical Status ≥ III</div>\
+      <div class="rg">\
+        <div class="rb"><input type="radio" name="q1" id="q1s" value="Sim"><label for="q1s" class="sim">Sim</label></div>\
+        <div class="rb"><input type="radio" name="q1" id="q1n" value="Não"><label for="q1n" class="nao">Não</label></div>\
+      </div>\
+    </div>\
+    <div class="q"><div class="ql">Q2 — Apneia do sono ou via aérea potencialmente difícil</div>\
+      <div class="qt">Tem alguma das seguintes situações?<ul>\
+        <li>Apneia do sono grave com má tolerância ou má adesão ao CPAP/BiPAP</li>\
+        <li>Antecedentes documentados de intubação difícil ou via aérea difícil em anestesia anterior</li>\
+      </ul></div>\
+      <div class="qh">Base: STOP-BANG — principal preditor de hipoxemia em endoscopia sedada</div>\
+      <div class="rg">\
+        <div class="rb"><input type="radio" name="q2" id="q2s" value="Sim"><label for="q2s" class="sim">Sim</label></div>\
+        <div class="rb"><input type="radio" name="q2" id="q2n" value="Não"><label for="q2n" class="nao">Não</label></div>\
+      </div>\
+    </div>\
+    <div class="q"><div class="ql">Q3 — Peso e Altura</div>\
+      <div class="qt">Indique o seu peso e altura. O IMC será calculado automaticamente.</div>\
+      <div class="qh">Base: IMC > 40 é factor independente de risco em endoscopia sedada</div>\
+      <div class="fr" style="margin-top:10px">\
+        <div class="f"><label>Peso (kg)</label><input type="number" id="q3peso" placeholder="Ex: 85" min="20" max="300" oninput="calcImc()"></div>\
+        <div class="f"><label>Altura (cm)</label><input type="number" id="q3altura" placeholder="Ex: 170" min="100" max="250" oninput="calcImc()"></div>\
+      </div>\
+      <div id="q3imc" style="margin-top:10px;font-size:13px"></div>\
+    </div>\
+    <div class="q"><div class="ql">Q4 — Insuficiência renal, hepática ou coagulopatia</div>\
+      <div class="qt">Tem alguma das seguintes situações?<ul>\
+        <li>Insuficiência renal crónica (diálise ou creatinina muito elevada)</li>\
+        <li>Cirrose ou doença hepática grave</li>\
+        <li>Anticoagulantes que não podem ser suspensos antes do procedimento (válvula cardíaca mecânica, trombose venosa ou pulmonar recentes, arritmia caracterizada pelo cardiologista como grave)</li>\
+        <li>Doença hemorrágica conhecida (hemofilia, trombocitopenia grave)</li>\
+      </ul></div>\
+      <div class="qh">Base: altera farmacocinética dos sedativos; relevante em biópsia ou polipectomia</div>\
+      <div class="rg">\
+        <div class="rb"><input type="radio" name="q4" id="q4s" value="Sim"><label for="q4s" class="sim">Sim</label></div>\
+        <div class="rb"><input type="radio" name="q4" id="q4n" value="Não"><label for="q4n" class="nao">Não</label></div>\
+      </div>\
+    </div>\
+    <div class="q"><div class="ql">Q5 — Reação adversa prévia a anestesia ou doença neuromuscular</div>\
+      <div class="qt">Tem alguma das seguintes situações?<ul>\
+        <li>Complicação grave relacionada com a anestesia com necessidade de tratamento em Cuidados Intensivos</li>\
+        <li>Alergia confirmada a anestésicos</li>\
+        <li>Doença muscular ou neurológica grave: miastenia gravis, distrofia muscular, ELA, Parkinson avançado</li>\
+      </ul></div>\
+      <div class="qh">Base: hipertermia maligna e doenças neuromusculares exigem planeamento específico</div>\
+      <div class="rg">\
+        <div class="rb"><input type="radio" name="q5" id="q5s" value="Sim"><label for="q5s" class="sim">Sim</label></div>\
+        <div class="rb"><input type="radio" name="q5" id="q5n" value="Não"><label for="q5n" class="nao">Não</label></div>\
+      </div>\
+    </div>\
+  </div>\
+  <div class="card"><div class="ct">Medicação habitual</div>\
+    <div class="q" style="border:none;padding:0;margin:0"><div class="ql">Q6 — Toma medicamentos habitualmente?</div>\
+      <div class="rg" style="margin-top:10px">\
+        <div class="rb"><input type="radio" name="q6" id="q6s" value="Sim"><label for="q6s" class="sim" onclick="toggleMeds(true)">Sim</label></div>\
+        <div class="rb"><input type="radio" name="q6" id="q6n" value="Não"><label for="q6n" class="nao" onclick="toggleMeds(false)">Não</label></div>\
+      </div>\
+    </div>\
+    <div id="sm">\
+      <div class="nota" style="margin-top:16px">Inclua <strong>todos os medicamentos</strong> que toma regularmente. Indique os horários assinalando as colunas.</div>\
+      <div class="mtw"><table>\
+        <thead><tr>\
+          <th style="text-align:left">Medicamento</th><th style="text-align:left">Dose</th>\
+          <th>Jejum</th><th>Peq. almoço</th><th>Almoço</th><th>Jantar</th><th>Deitar</th>\
+          <th></th>\
+        </tr></thead>\
+        <tbody id="mb"></tbody>\
+      </table></div>\
+      <button class="ba" onclick="addRow()">+ Adicionar medicamento</button>\
+    </div>\
+  </div>\
+  <button class="bs" id="bsub" onclick="submeter()"><span id="bl">Submeter questionário</span><div class="sp" id="sp"></div></button>\
+  <div class="msg ok" id="mok"></div>\
+  <div class="msg er" id="mer"></div>';
+}
+
+// ── Mostrar erro de token ─────────────────────────────────────────────────
+function mostrarErro(titulo, texto) {
+  document.getElementById('mainWrap').innerHTML =
+    '<div class="msg er" style="display:block;margin-top:24px">'
+    + '<strong>' + titulo + '</strong>' + texto + '</div>';
+}
+
+// ── IMC ───────────────────────────────────────────────────────────────────
+function calcImc() {
+  var p  = parseFloat(document.getElementById('q3peso').value);
+  var a  = parseFloat(document.getElementById('q3altura').value);
+  var el = document.getElementById('q3imc');
+  if (p && a && a > 0) {
+    var imc = (p / ((a/100) * (a/100))).toFixed(1);
+    el.textContent   = 'IMC: ' + imc + ' kg/m²';
+    el.style.color   = imc > 40 ? '#C0392B' : '#2E7D52';
+    el.style.fontWeight = '600';
+  } else {
+    el.textContent = ''; el.style.color = ''; el.style.fontWeight = '';
+  }
+}
+
+// ── Tabela de medicamentos ────────────────────────────────────────────────
+function toggleMeds(s) {
+  document.getElementById('sm').style.display = s ? 'block' : 'none';
+  if (s && !document.getElementById('mb').children.length) { addRow(); addRow(); addRow(); }
+}
+
+function addRow() {
+  var tr = document.createElement('tr');
+  tr.innerHTML =
+    '<td><input type="text" placeholder="Nome do medicamento" class="mn"></td>'
+    + '<td><input type="text" placeholder="Ex: 10mg" class="md" style="max-width:85px"></td>'
+    + '<td class="cc"><input type="checkbox" class="je"></td>'
+    + '<td class="cc"><input type="checkbox" class="pa"></td>'
+    + '<td class="cc"><input type="checkbox" class="al"></td>'
+    + '<td class="cc"><input type="checkbox" class="ja"></td>'
+    + '<td class="cc"><input type="checkbox" class="de"></td>'
+    + '<td><button class="brm" onclick="this.closest(\'tr\').remove()" title="Remover">✕</button></td>';
+  document.getElementById('mb').appendChild(tr);
+  tr.querySelector('.mn').focus();
+}
+
+function recolherMeds() {
+  var meds = [];
+  document.querySelectorAll('#mb tr').forEach(function(tr) {
+    var n = tr.querySelector('.mn').value.trim();
+    if (!n) return;
+    meds.push({
+      medicamento: n, dose: tr.querySelector('.md').value.trim(),
+      jejum: tr.querySelector('.je').checked, pequeno_almoco: tr.querySelector('.pa').checked,
+      almoco: tr.querySelector('.al').checked, jantar: tr.querySelector('.ja').checked,
+      deitar: tr.querySelector('.de').checked
+    });
+  });
+  return meds;
+}
+
+// ── Validação ─────────────────────────────────────────────────────────────
+function validar() {
+  var e = [];
+  if (!document.getElementById('nome').value.trim()) e.push('Nome completo');
+  if (!document.getElementById('hcis').value.trim()) e.push('HCIS');
+  if (!document.getElementById('nasc').value)        e.push('Data de nascimento');
+  if (!document.getElementById('tex').value)         e.push('Tipo de exame');
+  ['q1','q2','q4','q5','q6'].forEach(function(q) {
+    if (!document.querySelector('input[name="' + q + '"]:checked')) e.push('Questão ' + q.toUpperCase());
+  });
+  return e;
+}
+
+// ── Submissão ─────────────────────────────────────────────────────────────
+function submeter() {
+  var erros = validar();
+  if (erros.length) { alert('Por favor preencha:\n• ' + erros.join('\n• ')); return; }
+
+  var q6 = document.querySelector('input[name="q6"]:checked').value;
+  var dados = {
+    token:      TOKEN,
+    nome:       document.getElementById('nome').value.trim(),
+    hcis:       document.getElementById('hcis').value.trim(),
+    nascimento: document.getElementById('nasc').value,
+    dataExame:  document.getElementById('dex').value,
+    tipoExame:  document.getElementById('tex').value,
+    contacto:   document.getElementById('tel').value.trim(),
+    q1: document.querySelector('input[name="q1"]:checked').value,
+    q2: document.querySelector('input[name="q2"]:checked').value,
+    q3peso:   document.getElementById('q3peso').value,
+    q3altura: document.getElementById('q3altura').value,
+    q4: document.querySelector('input[name="q4"]:checked').value,
+    q5: document.querySelector('input[name="q5"]:checked').value,
+    q6: q6,
+    medicamentos: q6 === 'Sim' ? recolherMeds() : []
+  };
+
+  var btn = document.getElementById('bsub');
+  btn.disabled = true;
+  document.getElementById('bl').textContent = 'A enviar...';
+  document.getElementById('sp').style.display = 'block';
+  document.getElementById('mok').style.display = 'none';
+  document.getElementById('mer').style.display = 'none';
+
+  // Content-Type: text/plain evita preflight CORS no Apps Script
+  fetch(APPS_SCRIPT_URL, {
+    method:  'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body:    JSON.stringify(dados)
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(r) {
+    btn.style.display = 'none';
+    if (r.status === 'erro') {
+      var mer = document.getElementById('mer');
+      mer.innerHTML = '<strong>Questionário indisponível</strong>' + r.motivo;
+      mer.style.display = 'block';
+    } else {
+      var mok = document.getElementById('mok');
+      mok.innerHTML = '<strong>Obrigado pelo preenchimento</strong>As suas respostas foram registadas e serão analisadas pela equipa de Anestesiologia. Se necessário, entraremos em contacto consigo.';
+      mok.style.display = 'block';
+    }
+  })
+  .catch(function() {
+    btn.disabled = false;
+    document.getElementById('bl').textContent = 'Tentar novamente';
+    document.getElementById('sp').style.display = 'none';
+    var mer = document.getElementById('mer');
+    mer.innerHTML = '<strong>Erro de ligação</strong>Verifique a sua ligação à internet e tente novamente.';
+    mer.style.display = 'block';
+  });
+}
+</script>
+</body>
+</html>
