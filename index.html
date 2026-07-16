@@ -118,18 +118,8 @@ window.addEventListener('DOMContentLoaded', function() {
     mostrarErro('Link inválido', 'Este link não é válido. Por favor contacte o serviço para solicitar um novo questionário.');
     return;
   }
-  fetch(APPS_SCRIPT_URL + '?action=validateToken&token=' + encodeURIComponent(TOKEN))
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      if (data.valido) {
-        construirFormulario();
-      } else {
-        mostrarErro('Questionário indisponível', data.motivo || 'Este link não é válido ou já foi utilizado.');
-      }
-    })
-    .catch(function() {
-      mostrarErro('Erro de ligação', 'Não foi possível verificar o link. Verifique a sua ligação à internet e tente novamente.');
-    });
+  // Token validado no servidor ao submeter — sem chamada CORS no carregamento
+  construirFormulario();
 });
 
 // ── Construir formulário ──────────────────────────────────────────────────
