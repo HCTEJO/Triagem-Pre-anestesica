@@ -118,22 +118,11 @@ window.addEventListener('DOMContentLoaded', function() {
     mostrarErro('Link inválido', 'Este link não é válido. Por favor contacte o serviço para solicitar um novo questionário.');
     return;
   }
-  // Carregar questões da aba Sheets antes de construir o formulário
-  fetch(APPS_SCRIPT_URL + '?action=getQuestoes')
-    .then(function(r) { return r.json(); })
-    .then(function(questoes) { construirFormulario(questoes); })
-    .catch(function() { construirFormulario(null); });
+  construirFormulario();
 });
 
 // ── Construir formulário ──────────────────────────────────────────────────
-function construirFormulario(q) {
-  q = q || {};
-  function _titulo(id, fb) { return (q[id] && q[id].titulo) ? q[id].titulo : fb; }
-  function _nota(id, fb)   { return (q[id] && q[id].nota)   ? q[id].nota   : fb; }
-  function _items(id, fb)  {
-    var arr = (q[id] && q[id].items && q[id].items.length) ? q[id].items : fb;
-    return arr.map(function(x){ return '<li>' + x + '</li>'; }).join('');
-  }
+function construirFormulario() {
   var wrap = document.getElementById('mainWrap');
 
   var optGastro = '<option value="Gastrenterologia"' + (EXAME==='Gastrenterologia'?' selected':'') + '>Gastrenterologia</option>';
@@ -163,7 +152,13 @@ function construirFormulario(q) {
   <div class="card"><div class="ct">Questões de Triagem</div>\
     <div class="q"><div class="ql">Q1 — Doença cardíaca ou respiratória grave</div>\
       <div class="qt">Tem alguma das seguintes situações?<ul>\
-' + _items('q1',['Insuficiência cardíaca com limitação para actividades do dia-a-dia','Enfarte do miocárdio nos últimos 6 meses','Arritmia cardíaca grave ou mal controlada (excluindo fibrilação auricular estável)','Angina instável','DPOC com oxigenoterapia ou fibrose pulmonar','Hipertensão pulmonar','Pacemaker ou cardiodesfibrilhador implantado que necessite de ser desactivado antes de procedimentos']) + '\
+        <li>Insuficiência cardíaca com limitação para actividades do dia-a-dia</li>\
+        <li>Enfarte do miocárdio nos últimos 6 meses</li>\
+        <li>Arritmia cardíaca grave ou mal controlada (excluindo fibrilação auricular estável)</li>\
+        <li>Angina instável</li>\
+        <li>DPOC com oxigenoterapia ou fibrose pulmonar</li>\
+        <li>Hipertensão pulmonar</li>\
+        <li>Pacemaker ou cardiodesfibrilhador implantado que necessite de ser desactivado antes de procedimentos</li>\
 
 
 
@@ -171,7 +166,7 @@ function construirFormulario(q) {
 
 
       </ul></div>\
-      <div class="qh">' + _nota('q1','Base: RCRI + ASA Physical Status ≥ III') + '</div>\
+      <div class="qh">Base: RCRI + ASA Physical Status ≥ III</div>\
       <div class="rg">\
         <div class="rb"><input type="radio" name="q1" id="q1s" value="Sim"><label for="q1s" class="sim">Sim</label></div>\
         <div class="rb"><input type="radio" name="q1" id="q1n" value="Não"><label for="q1n" class="nao">Não</label></div>\
@@ -179,10 +174,11 @@ function construirFormulario(q) {
     </div>\
     <div class="q"><div class="ql">Q2 — Apneia do sono ou via aérea potencialmente difícil</div>\
       <div class="qt">Tem alguma das seguintes situações?<ul>\
-' + _items('q2',['Apneia do sono grave com má tolerância ou má adesão ao CPAP/BiPAP','Antecedentes documentados de intubação difícil ou via aérea difícil em anestesia anterior']) + '\
+        <li>Apneia do sono grave com má tolerância ou má adesão ao CPAP/BiPAP</li>\
+        <li>Antecedentes documentados de intubação difícil ou via aérea difícil em anestesia anterior</li>\
 
       </ul></div>\
-      <div class="qh">' + _nota('q2','Base: STOP-BANG — principal preditor de hipoxemia em endoscopia sedada') + '</div>\
+      <div class="qh">Base: STOP-BANG — principal preditor de hipoxemia em endoscopia sedada</div>\
       <div class="rg">\
         <div class="rb"><input type="radio" name="q2" id="q2s" value="Sim"><label for="q2s" class="sim">Sim</label></div>\
         <div class="rb"><input type="radio" name="q2" id="q2n" value="Não"><label for="q2n" class="nao">Não</label></div>\
@@ -199,12 +195,15 @@ function construirFormulario(q) {
     </div>\
     <div class="q"><div class="ql">Q4 — Insuficiência renal, hepática ou coagulopatia</div>\
       <div class="qt">Tem alguma das seguintes situações?<ul>\
-' + _items('q4',['Insuficiência renal crónica (diálise ou creatinina muito elevada)','Cirrose ou doença hepática grave','Anticoagulantes que não podem ser suspensos antes do procedimento (válvula cardíaca mecânica, trombose venosa ou pulmonar recentes, arritmia caracterizada pelo cardiologista como grave)','Doença hemorrágica conhecida (hemofilia, trombocitopenia grave)']) + '\
+        <li>Insuficiência renal crónica (diálise ou creatinina muito elevada)</li>\
+        <li>Cirrose ou doença hepática grave</li>\
+        <li>Anticoagulantes que não podem ser suspensos antes do procedimento (válvula cardíaca mecânica, trombose venosa ou pulmonar recentes, arritmia caracterizada pelo cardiologista como grave)</li>\
+        <li>Doença hemorrágica conhecida (hemofilia, trombocitopenia grave)</li>\
 
 
 
       </ul></div>\
-      <div class="qh">' + _nota('q4','Base: altera farmacocinética dos sedativos; relevante em biópsia ou polipectomia') + '</div>\
+      <div class="qh">Base: altera farmacocinética dos sedativos; relevante em biópsia ou polipectomia</div>\
       <div class="rg">\
         <div class="rb"><input type="radio" name="q4" id="q4s" value="Sim"><label for="q4s" class="sim">Sim</label></div>\
         <div class="rb"><input type="radio" name="q4" id="q4n" value="Não"><label for="q4n" class="nao">Não</label></div>\
@@ -212,11 +211,13 @@ function construirFormulario(q) {
     </div>\
     <div class="q"><div class="ql">Q5 — Reação adversa prévia a anestesia ou doença neuromuscular</div>\
       <div class="qt">Tem alguma das seguintes situações?<ul>\
-' + _items('q5',['Complicação grave relacionada com a anestesia com necessidade de tratamento em Cuidados Intensivos','Alergia confirmada a anestésicos','Doença muscular ou neurológica grave: miastenia gravis, distrofia muscular, ELA, Parkinson avançado']) + '\
+        <li>Complicação grave relacionada com a anestesia com necessidade de tratamento em Cuidados Intensivos</li>\
+        <li>Alergia confirmada a anestésicos</li>\
+        <li>Doença muscular ou neurológica grave: miastenia gravis, distrofia muscular, ELA, Parkinson avançado</li>\
 
 
       </ul></div>\
-      <div class="qh">' + _nota('q5','Base: hipertermia maligna e doenças neuromusculares exigem planeamento específico') + '</div>\
+      <div class="qh">Base: hipertermia maligna e doenças neuromusculares exigem planeamento específico</div>\
       <div class="rg">\
         <div class="rb"><input type="radio" name="q5" id="q5s" value="Sim"><label for="q5s" class="sim">Sim</label></div>\
         <div class="rb"><input type="radio" name="q5" id="q5n" value="Não"><label for="q5n" class="nao">Não</label></div>\
