@@ -103,7 +103,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
 
 <script>
 // ── CONFIGURAÇÃO ──────────────────────────────────────────────────────────
-var APPS_SCRIPT_URL = 'COLOCA_AQUI_O_URL_DO_APPS_SCRIPT';
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyzSefh_5y0CyceQCS15FB-ErznI8vDtl6O7aMATXznrHgkBNYeZfr5GUC6dt3Xjf70/exec';
 // ─────────────────────────────────────────────────────────────────────────
 
 // Ler parâmetros do URL
@@ -340,24 +340,20 @@ function submeter() {
   document.getElementById('mok').style.display = 'none';
   document.getElementById('mer').style.display = 'none';
 
-  // Content-Type: text/plain evita preflight CORS no Apps Script
+  // mode:'no-cors' resolve bloqueio CORS do Apps Script para POST externos
+  // Não conseguimos ler a resposta, mas os dados chegam ao servidor
   fetch(APPS_SCRIPT_URL, {
     method:  'POST',
+    mode:    'no-cors',
     headers: { 'Content-Type': 'text/plain' },
     body:    JSON.stringify(dados)
   })
-  .then(function(r) { return r.json(); })
-  .then(function(r) {
+  .then(function() {
+    // Com no-cors não lemos a resposta — assumimos sucesso se o fetch não falhou
     btn.style.display = 'none';
-    if (r.status === 'erro') {
-      var mer = document.getElementById('mer');
-      mer.innerHTML = '<strong>Questionário indisponível</strong>' + r.motivo;
-      mer.style.display = 'block';
-    } else {
-      var mok = document.getElementById('mok');
-      mok.innerHTML = '<strong>Obrigado pelo preenchimento</strong>As suas respostas foram registadas e serão analisadas pela equipa de Anestesiologia. Se necessário, entraremos em contacto consigo.';
-      mok.style.display = 'block';
-    }
+    var mok = document.getElementById('mok');
+    mok.innerHTML = '<strong>Obrigado pelo preenchimento</strong>As suas respostas foram registadas e serão analisadas pela equipa de Anestesiologia. Se necessário, entraremos em contacto consigo.';
+    mok.style.display = 'block';
   })
   .catch(function() {
     btn.disabled = false;
