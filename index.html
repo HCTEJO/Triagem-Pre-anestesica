@@ -7,8 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --teal:#2271B3; --tl:#E8F1FB; --tm:#C5D9F1; --td:#174F8A;
-  --red:#2271B3; --rl:#E8F1FB; --green:#2271B3; --gl:#E8F1FB;
+  --teal:#006B6B; --tl:#E6F4F4; --tm:#CCE9E9; --td:#004F4F;
+  --red:#C0392B; --rl:#FDECEA; --green:#2E7D52; --gl:#EAFAF1;
   --text:#1A1A2E; --muted:#6B7280; --border:#D1E8E8;
   --bg:#F5FAFA; --white:#fff; --r:12px;
   --serif:"DM Serif Display",Georgia,serif;
@@ -40,8 +40,8 @@ header p{font-size:13px;opacity:.82;line-height:1.55;max-width:460px}
 .rg{display:flex;gap:10px}
 .rb{flex:1}.rb input[type=radio]{display:none}
 .rb label{display:block;text-align:center;padding:10px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;transition:all .15s;color:var(--muted);background:var(--white)}
-.rb input:checked+label.sim{background:#E8F1FB;border-color:#2271B3;color:#2271B3}
-.rb input:checked+label.nao{background:#E8F1FB;border-color:#2271B3;color:#2271B3}
+.rb input:checked+label.sim{background:var(--rl);border-color:var(--red);color:var(--red)}
+.rb input:checked+label.nao{background:var(--gl);border-color:var(--green);color:var(--green)}
 .rb label:hover{border-color:var(--teal)}
 #sm{display:none;margin-top:18px}
 .mtw{overflow-x:auto;margin:14px -4px 0;padding:0 4px}
@@ -77,6 +77,10 @@ td input[type=text]::placeholder{color:#B0C4C4;font-style:italic}
 .er{background:var(--rl);border:1.5px solid #FECACA;color:var(--red)}
 .er strong{display:block;font-size:15px;margin-bottom:6px}
 footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;padding:0 16px;line-height:1.6}
+.med-badge{display:none;margin-top:4px;font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;border-radius:4px;color:white}
+.badge-glp1{background:#E67E22}
+.badge-ac{background:#C0392B}
+.badge-ache{background:#8E44AD}
 </style>
 </head>
 <body>
@@ -158,7 +162,7 @@ function construirFormulario() {
   html += '<li>Enfarte do miocárdio nos últimos 6 meses</li>';
   html += '<li>Arritmia cardíaca grave ou mal controlada (excluindo fibrilação auricular estável)</li>';
   html += '<li>Angina instável</li>';
-  html += '<li>DPOC ou Fibrose Pulmonar com oxigenoterapia no domicílio</li>';
+  html += '<li>DPOC com oxigenoterapia ou fibrose pulmonar</li>';
   html += '<li>Hipertensão pulmonar</li>';
   html += '<li>Pacemaker ou cardiodesfibrilhador implantado que necessite de ser desactivado antes de procedimentos</li>';
   html += '</ul></div>';
@@ -221,7 +225,31 @@ function construirFormulario() {
   html += '<div class="mtw"><table><thead><tr>';
   html += '<th style="text-align:left">Medicamento</th><th style="text-align:left">Dose</th>';
   html += '<th>Jejum</th><th>Peq. almoço</th><th>Almoço</th><th>Jantar</th><th>Deitar</th><th></th>';
-  html += '</tr></thead><tbody id="mb"></tbody></table></div>';
+  html += '</tr></thead><tbody id="mb"></tbody></table></div>
+<datalist id="med-list">
+<option value="Semaglutida"><option value="Ozempic"><option value="Wegovy"><option value="Rybelsus">
+<option value="Liraglutida"><option value="Victoza"><option value="Saxenda">
+<option value="Dulaglutida"><option value="Trulicity">
+<option value="Exenatida"><option value="Byetta"><option value="Bydureon">
+<option value="Tirzepatida"><option value="Mounjaro">
+<option value="Lixisenatida">
+<option value="Varfarina"><option value="Varfine">
+<option value="Acenocumarol"><option value="Sintrom">
+<option value="Rivaroxabano"><option value="Xarelto">
+<option value="Apixabano"><option value="Eliquis">
+<option value="Dabigatrano"><option value="Pradaxa">
+<option value="Edoxabano"><option value="Lixiana">
+<option value="Heparina">
+<option value="Enoxaparina"><option value="Clexane">
+<option value="Nadroparina"><option value="Fraxiparina">
+<option value="Tinzaparina"><option value="Innohep">
+<option value="Fondaparinux"><option value="Arixtra">
+<option value="Piridostigmina"><option value="Mestinon">
+<option value="Donepezilo"><option value="Aricept">
+<option value="Rivastigmina"><option value="Exelon">
+<option value="Galantamina"><option value="Reminyl">
+<option value="Neostigmina">
+</datalist>';
   html += '<button class="ba" onclick="addRow()">+ Adicionar medicamento</button>';
   html += '</div></div>';
 
@@ -234,6 +262,53 @@ function construirFormulario() {
 }
 
 // ── IMC ───────────────────────────────────────────────────────────────────
+
+var MEDICAMENTOS = (function(){
+  var glp1 = {label:'Agonista GLP-1', cls:'badge-glp1'};
+  var ac   = {label:'Anticoagulante',  cls:'badge-ac'};
+  var ache = {label:'Anticolinesterásico', cls:'badge-ache'};
+  return {
+    // GLP-1
+    'semaglutida':glp1,'ozempic':glp1,'wegovy':glp1,'rybelsus':glp1,
+    'liraglutida':glp1,'victoza':glp1,'saxenda':glp1,
+    'dulaglutida':glp1,'trulicity':glp1,
+    'exenatida':glp1,'byetta':glp1,'bydureon':glp1,
+    'tirzepatida':glp1,'mounjaro':glp1,
+    'lixisenatida':glp1,
+    // Anticoagulantes
+    'varfarina':ac,'varfine':ac,
+    'acenocumarol':ac,'sintrom':ac,
+    'rivaroxabano':ac,'xarelto':ac,
+    'apixabano':ac,'eliquis':ac,
+    'dabigatrano':ac,'pradaxa':ac,
+    'edoxabano':ac,'lixiana':ac,
+    'heparina':ac,
+    'enoxaparina':ac,'clexane':ac,
+    'nadroparina':ac,'fraxiparina':ac,
+    'tinzaparina':ac,'innohep':ac,
+    'fondaparinux':ac,'arixtra':ac,
+    // Anticolinesterásicos
+    'piridostigmina':ache,'mestinon':ache,
+    'donepezilo':ache,'aricept':ache,
+    'rivastigmina':ache,'exelon':ache,
+    'galantamina':ache,'reminyl':ache,
+    'neostigmina':ache
+  };
+})();
+
+function verificarMedicamento(input) {
+  var val   = input.value.trim().toLowerCase();
+  var badge = input.nextElementSibling;
+  var cat   = MEDICAMENTOS[val];
+  if (cat) {
+    badge.textContent  = cat.label;
+    badge.className    = 'med-badge ' + cat.cls;
+    badge.style.display = 'inline-block';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
 function calcImc() {
   var p  = parseFloat(document.getElementById('q3peso').value);
   var a  = parseFloat(document.getElementById('q3altura').value);
@@ -259,7 +334,7 @@ function toggleMeds(s) {
 function addRow() {
   var tr = document.createElement('tr');
   tr.innerHTML =
-    '<td><input type="text" placeholder="Nome do medicamento" class="mn"></td>' +
+    '<td><input type="text" placeholder="Nome do medicamento" class="mn" list="med-list" oninput="verificarMedicamento(this)"><span class="med-badge"></span></td>' +
     '<td><input type="text" placeholder="Ex: 10mg" class="md" style="max-width:85px"></td>' +
     '<td class="cc"><input type="checkbox" class="je"></td>' +
     '<td class="cc"><input type="checkbox" class="pa"></td>' +
