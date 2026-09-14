@@ -7,10 +7,10 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --teal:#006B6B; --tl:#E6F4F4; --tm:#CCE9E9; --td:#004F4F;
-  --red:#C0392B; --rl:#FDECEA; --green:#2E7D52; --gl:#EAFAF1;
-  --text:#1A1A2E; --muted:#6B7280; --border:#D1E8E8;
-  --bg:#F5FAFA; --white:#fff; --r:12px;
+  --teal:#2271B3; --tl:#E8F1FB; --tm:#C5D9F1; --td:#174F8A;
+  --red:#2271B3; --rl:#E8F1FB; --green:#2271B3; --gl:#E8F1FB;
+  --text:#1A1A2E; --muted:#6B7280; --border:#C5D9F1;
+  --bg:#F5F8FD; --white:#fff; --r:12px;
   --serif:"DM Serif Display",Georgia,serif;
   --sans:"DM Sans",system-ui,sans-serif;
 }
@@ -22,7 +22,7 @@ header::after{content:"";position:absolute;bottom:-30px;right:-30px;width:140px;
 header h1{font-family:var(--serif);font-size:clamp(20px,5vw,28px);font-weight:400;line-height:1.2;margin-bottom:8px}
 header p{font-size:13px;opacity:.82;line-height:1.55;max-width:460px}
 .wrap{max-width:680px;margin:0 auto;padding:0 16px}
-.card{background:var(--white);border-radius:var(--r);box-shadow:0 2px 16px rgba(0,107,107,.10);padding:22px;margin-top:18px;border:1px solid var(--border)}
+.card{background:var(--white);border-radius:var(--r);box-shadow:0 2px 16px rgba(34,113,179,.10);padding:22px;margin-top:18px;border:1px solid var(--border)}
 .ct{font-family:var(--serif);font-size:17px;color:var(--td);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
 .fr{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
 @media(max-width:500px){.fr{grid-template-columns:1fr}}
@@ -50,37 +50,38 @@ thead th{background:var(--tl);color:var(--td);font-size:10px;font-weight:600;let
 thead th:first-child{text-align:left;border-radius:8px 0 0 0}
 thead th:nth-child(2){text-align:left}
 thead th:last-child{border-radius:0 8px 0 0;width:40px}
-tbody tr:hover{background:#f8fefe}
-tbody td{padding:5px;border-bottom:1px solid #EEF6F6;vertical-align:middle}
-tbody td:first-child{min-width:150px}tbody td:nth-child(2){min-width:75px}
+tbody tr:hover{background:#f8fbff}
+tbody td{padding:5px;border-bottom:1px solid #EEF4FB;vertical-align:top}
+tbody td:first-child{min-width:160px}
+tbody td:nth-child(2){min-width:75px}
 td input[type=text]{width:100%;border:1.5px solid var(--border);border-radius:7px;padding:7px 9px;font-family:var(--sans);font-size:12px;color:var(--text);background:var(--white);transition:border-color .2s}
 td input[type=text]:focus{outline:none;border-color:var(--teal);background:var(--tl)}
 td input[type=text]::placeholder{color:#B0C4C4;font-style:italic}
-.cc{text-align:center}
+.med-badge{display:none;margin-top:3px;font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;border-radius:4px;color:white}
+.badge-glp1{background:#E67E22}
+.badge-ac{background:#C0392B}
+.badge-ache{background:#8E44AD}
+.cc{text-align:center;vertical-align:middle}
 .cc input[type=checkbox]{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:2px solid var(--border);border-radius:5px;cursor:pointer;transition:all .15s;position:relative;display:inline-block;vertical-align:middle;background:var(--white)}
 .cc input[type=checkbox]:checked{background:var(--teal);border-color:var(--teal)}
 .cc input[type=checkbox]:checked::after{content:"";position:absolute;left:4px;top:1px;width:7px;height:11px;border:2.5px solid white;border-top:none;border-left:none;transform:rotate(45deg)}
 .brm{background:none;border:none;color:#CBD5D5;cursor:pointer;padding:3px;border-radius:5px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;transition:all .15s;margin:0 auto}
-.brm:hover{background:#FEE2E2;color:var(--red)}
+.brm:hover{background:#FEE2E2;color:#C0392B}
 .ba{display:flex;align-items:center;gap:7px;background:var(--tl);color:var(--td);border:1.5px dashed var(--teal);border-radius:8px;padding:8px 14px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;margin-top:12px}
 .ba:hover{background:var(--tm)}
 .nota{background:var(--tl);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:11px 13px;font-size:13px;color:var(--td);line-height:1.55}
-.rgpd{background:var(--white);border-radius:var(--r);box-shadow:0 2px 16px rgba(0,107,107,.10);padding:18px 22px;margin-top:18px;border-left:4px solid var(--teal);font-size:12px;line-height:1.7;color:var(--muted)}
-.bs{width:100%;background:var(--teal);color:white;border:none;border-radius:var(--r);padding:15px;font-family:var(--sans);font-size:16px;font-weight:600;cursor:pointer;transition:all .2s;margin-top:22px;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 4px 14px rgba(0,107,107,.25)}
+.rgpd{background:var(--white);border-radius:var(--r);box-shadow:0 2px 16px rgba(34,113,179,.10);padding:18px 22px;margin-top:18px;border-left:4px solid var(--teal);font-size:12px;line-height:1.7;color:var(--muted)}
+.bs{width:100%;background:var(--teal);color:white;border:none;border-radius:var(--r);padding:15px;font-family:var(--sans);font-size:16px;font-weight:600;cursor:pointer;transition:all .2s;margin-top:22px;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 4px 14px rgba(34,113,179,.25)}
 .bs:hover:not(:disabled){background:var(--td);transform:translateY(-1px)}
 .bs:disabled{background:#9DBDBD;cursor:not-allowed;box-shadow:none}
 .sp{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.4);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;display:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 .msg{display:none;border-radius:var(--r);padding:20px 24px;margin-top:20px;font-size:14px;line-height:1.6}
-.ok{background:var(--gl);border:1.5px solid #6EE7B7;color:var(--green)}
+.ok{background:#EAFAF1;border:1.5px solid #6EE7B7;color:#2E7D52}
 .ok strong{display:block;font-size:16px;margin-bottom:6px}
-.er{background:var(--rl);border:1.5px solid #FECACA;color:var(--red)}
+.er{background:#FEF2F2;border:1.5px solid #FECACA;color:#C0392B}
 .er strong{display:block;font-size:15px;margin-bottom:6px}
 footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;padding:0 16px;line-height:1.6}
-.med-badge{display:none;margin-top:4px;font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;border-radius:4px;color:white}
-.badge-glp1{background:#E67E22}
-.badge-ac{background:#C0392B}
-.badge-ache{background:#8E44AD}
 </style>
 </head>
 <body>
@@ -105,6 +106,41 @@ var TOKEN  = params.get('token')  || '';
 var HCIS   = params.get('hcis')   || '';
 var EXAME  = params.get('exame')  || '';
 
+// Lista de medicamentos com categoria
+var MEDICAMENTOS = (function() {
+  var glp1 = { label: 'Agonista GLP-1',       cls: 'badge-glp1' };
+  var ac   = { label: 'Anticoagulante',        cls: 'badge-ac'   };
+  var ache = { label: 'Anticolinesterásico',   cls: 'badge-ache' };
+  return {
+    'semaglutida':glp1, 'ozempic':glp1, 'wegovy':glp1, 'rybelsus':glp1,
+    'liraglutida':glp1, 'victoza':glp1, 'saxenda':glp1,
+    'dulaglutida':glp1, 'trulicity':glp1,
+    'exenatida':glp1, 'byetta':glp1, 'bydureon':glp1,
+    'tirzepatida':glp1, 'mounjaro':glp1,
+    'lixisenatida':glp1,
+    'varfarina':ac, 'varfine':ac,
+    'acenocumarol':ac, 'sintrom':ac,
+    'rivaroxabano':ac, 'xarelto':ac,
+    'apixabano':ac, 'eliquis':ac,
+    'dabigatrano':ac, 'pradaxa':ac,
+    'edoxabano':ac, 'lixiana':ac,
+    'heparina':ac,
+    'enoxaparina':ac, 'clexane':ac,
+    'nadroparina':ac, 'fraxiparina':ac,
+    'tinzaparina':ac, 'innohep':ac,
+    'fondaparinux':ac, 'arixtra':ac,
+    'piridostigmina':ache, 'mestinon':ache,
+    'donepezilo':ache, 'aricept':ache,
+    'rivastigmina':ache, 'exelon':ache,
+    'galantamina':ache, 'reminyl':ache,
+    'neostigmina':ache
+  };
+})();
+
+var MED_NOMES = Object.keys(MEDICAMENTOS).map(function(n) {
+  return n.charAt(0).toUpperCase() + n.slice(1);
+});
+
 // ── Arranque ──────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', function() {
   if (!TOKEN) {
@@ -114,7 +150,6 @@ window.addEventListener('DOMContentLoaded', function() {
   construirFormulario();
 });
 
-// ── Erro de token ─────────────────────────────────────────────────────────
 function mostrarErro(titulo, texto) {
   document.getElementById('mainWrap').innerHTML =
     '<div class="msg er" style="display:block;margin-top:24px"><strong>' + titulo + '</strong>' + texto + '</div>';
@@ -125,10 +160,11 @@ function construirFormulario() {
   var rHcis  = HCIS  ? ' readonly style="background:#f0f0f0;cursor:not-allowed"' : '';
   var rExame = EXAME ? ' disabled style="background:#f0f0f0;cursor:not-allowed"' : '';
 
-  var optG = '<option value="Gastrenterologia"' + (EXAME==='Gastrenterologia' ? ' selected' : '') + '>Gastrenterologia</option>';
-  var optP = '<option value="Pneumologia"'      + (EXAME==='Pneumologia'      ? ' selected' : '') + '>Pneumologia</option>';
-  var optI = '<option value="Imagiologia"'      + (EXAME==='Imagiologia'      ? ' selected' : '') + '>Imagiologia</option>';
-  var sel  = '<select id="tex"' + rExame + ' style="border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-family:var(--sans);font-size:14px;color:var(--text);background:var(--white);-webkit-appearance:none;width:100%"><option value="">-- Selecione --</option>' + optG + optP + optI + '</select>';
+  var optG = '<option value="Gastrenterologia"' + (EXAME === 'Gastrenterologia' ? ' selected' : '') + '>Gastrenterologia</option>';
+  var optP = '<option value="Pneumologia"'      + (EXAME === 'Pneumologia'      ? ' selected' : '') + '>Pneumologia</option>';
+  var optI = '<option value="Imagiologia"'      + (EXAME === 'Imagiologia'      ? ' selected' : '') + '>Imagiologia</option>';
+  var sel  = '<select id="tex"' + rExame + ' style="border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-family:var(--sans);font-size:14px;color:var(--text);background:var(--white);-webkit-appearance:none;width:100%">'
+           + '<option value="">-- Selecione --</option>' + optG + optP + optI + '</select>';
 
   var html = '';
 
@@ -212,48 +248,25 @@ function construirFormulario() {
   html += '<div class="rg"><div class="rb"><input type="radio" name="q5" id="q5s" value="Sim"><label for="q5s" class="sim">Sim</label></div>';
   html += '<div class="rb"><input type="radio" name="q5" id="q5n" value="Não"><label for="q5n" class="nao">Não</label></div></div></div>';
 
-  html += '</div>'; // fim card triagem
+  html += '</div>';
 
   // Medicação
   html += '<div class="card"><div class="ct">Medicação habitual</div>';
   html += '<div class="q" style="border:none;padding:0;margin:0"><div class="ql">Q6 — Toma medicamentos habitualmente?</div>';
   html += '<div class="rg" style="margin-top:10px">';
   html += '<div class="rb"><input type="radio" name="q6" id="q6s" value="Sim"><label for="q6s" class="sim" onclick="toggleMeds(true)">Sim</label></div>';
-  html += '<div class="rb"><input type="radio" name="q6" id="q6n" value="Não"><label for="q6n" class="nao" onclick="toggleMeds(false)">Não</label></div></div></div>';
+  html += '<div class="rb"><input type="radio" name="q6" id="q6n" value="Não"><label for="q6n" class="nao" onclick="toggleMeds(false)">Não</label></div>';
+  html += '</div></div>';
   html += '<div id="sm">';
   html += '<div class="nota" style="margin-top:16px">Inclua <strong>todos os medicamentos</strong> que toma regularmente. Indique os horários assinalando as colunas.</div>';
-  html += '<div class="mtw"><table><thead><tr>';
+  html += '<div class="mtw"><table>';
+  html += '<thead><tr>';
   html += '<th style="text-align:left">Medicamento</th><th style="text-align:left">Dose</th>';
   html += '<th>Jejum</th><th>Peq. almoço</th><th>Almoço</th><th>Jantar</th><th>Deitar</th><th></th>';
-  html += '</tr></thead><tbody id="mb"></tbody></table></div>
-<datalist id="med-list">
-<option value="Semaglutida"><option value="Ozempic"><option value="Wegovy"><option value="Rybelsus">
-<option value="Liraglutida"><option value="Victoza"><option value="Saxenda">
-<option value="Dulaglutida"><option value="Trulicity">
-<option value="Exenatida"><option value="Byetta"><option value="Bydureon">
-<option value="Tirzepatida"><option value="Mounjaro">
-<option value="Lixisenatida">
-<option value="Varfarina"><option value="Varfine">
-<option value="Acenocumarol"><option value="Sintrom">
-<option value="Rivaroxabano"><option value="Xarelto">
-<option value="Apixabano"><option value="Eliquis">
-<option value="Dabigatrano"><option value="Pradaxa">
-<option value="Edoxabano"><option value="Lixiana">
-<option value="Heparina">
-<option value="Enoxaparina"><option value="Clexane">
-<option value="Nadroparina"><option value="Fraxiparina">
-<option value="Tinzaparina"><option value="Innohep">
-<option value="Fondaparinux"><option value="Arixtra">
-<option value="Piridostigmina"><option value="Mestinon">
-<option value="Donepezilo"><option value="Aricept">
-<option value="Rivastigmina"><option value="Exelon">
-<option value="Galantamina"><option value="Reminyl">
-<option value="Neostigmina">
-</datalist>';
+  html += '</tr></thead><tbody id="mb"></tbody></table></div>';
   html += '<button class="ba" onclick="addRow()">+ Adicionar medicamento</button>';
   html += '</div></div>';
 
-  // Botão e mensagens
   html += '<button class="bs" id="bsub" onclick="submeter()"><span id="bl">Submeter questionário</span><div class="sp" id="sp"></div></button>';
   html += '<div class="msg ok" id="mok"></div>';
   html += '<div class="msg er" id="mer"></div>';
@@ -262,61 +275,14 @@ function construirFormulario() {
 }
 
 // ── IMC ───────────────────────────────────────────────────────────────────
-
-var MEDICAMENTOS = (function(){
-  var glp1 = {label:'Agonista GLP-1', cls:'badge-glp1'};
-  var ac   = {label:'Anticoagulante',  cls:'badge-ac'};
-  var ache = {label:'Anticolinesterásico', cls:'badge-ache'};
-  return {
-    // GLP-1
-    'semaglutida':glp1,'ozempic':glp1,'wegovy':glp1,'rybelsus':glp1,
-    'liraglutida':glp1,'victoza':glp1,'saxenda':glp1,
-    'dulaglutida':glp1,'trulicity':glp1,
-    'exenatida':glp1,'byetta':glp1,'bydureon':glp1,
-    'tirzepatida':glp1,'mounjaro':glp1,
-    'lixisenatida':glp1,
-    // Anticoagulantes
-    'varfarina':ac,'varfine':ac,
-    'acenocumarol':ac,'sintrom':ac,
-    'rivaroxabano':ac,'xarelto':ac,
-    'apixabano':ac,'eliquis':ac,
-    'dabigatrano':ac,'pradaxa':ac,
-    'edoxabano':ac,'lixiana':ac,
-    'heparina':ac,
-    'enoxaparina':ac,'clexane':ac,
-    'nadroparina':ac,'fraxiparina':ac,
-    'tinzaparina':ac,'innohep':ac,
-    'fondaparinux':ac,'arixtra':ac,
-    // Anticolinesterásicos
-    'piridostigmina':ache,'mestinon':ache,
-    'donepezilo':ache,'aricept':ache,
-    'rivastigmina':ache,'exelon':ache,
-    'galantamina':ache,'reminyl':ache,
-    'neostigmina':ache
-  };
-})();
-
-function verificarMedicamento(input) {
-  var val   = input.value.trim().toLowerCase();
-  var badge = input.nextElementSibling;
-  var cat   = MEDICAMENTOS[val];
-  if (cat) {
-    badge.textContent  = cat.label;
-    badge.className    = 'med-badge ' + cat.cls;
-    badge.style.display = 'inline-block';
-  } else {
-    badge.style.display = 'none';
-  }
-}
-
 function calcImc() {
   var p  = parseFloat(document.getElementById('q3peso').value);
   var a  = parseFloat(document.getElementById('q3altura').value);
   var el = document.getElementById('q3imc');
   if (p && a && a > 0) {
-    var imc = (p / ((a/100) * (a/100))).toFixed(1);
-    el.textContent   = 'IMC: ' + imc + ' kg/m²';
-    el.style.color   = imc > 40 ? '#C0392B' : '#2E7D52';
+    var imc = (p / ((a / 100) * (a / 100))).toFixed(1);
+    el.textContent      = 'IMC: ' + imc + ' kg/m²';
+    el.style.color      = imc > 40 ? '#C0392B' : '#2E7D52';
     el.style.fontWeight = '600';
   } else {
     el.textContent = ''; el.style.color = ''; el.style.fontWeight = '';
@@ -324,6 +290,19 @@ function calcImc() {
 }
 
 // ── Medicamentos ──────────────────────────────────────────────────────────
+function verificarMedicamento(input) {
+  var val   = input.value.trim().toLowerCase();
+  var badge = input.nextElementSibling;
+  var cat   = MEDICAMENTOS[val];
+  if (cat) {
+    badge.textContent   = cat.label;
+    badge.className     = 'med-badge ' + cat.cls;
+    badge.style.display = 'inline-block';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
 function toggleMeds(s) {
   document.getElementById('sm').style.display = s ? 'block' : 'none';
   if (s && !document.getElementById('mb').children.length) {
@@ -352,16 +331,28 @@ function recolherMeds() {
     var n = tr.querySelector('.mn').value.trim();
     if (!n) return;
     meds.push({
-      medicamento: n,
-      dose: tr.querySelector('.md').value.trim(),
-      jejum: tr.querySelector('.je').checked,
+      medicamento:    n,
+      dose:           tr.querySelector('.md').value.trim(),
+      jejum:          tr.querySelector('.je').checked,
       pequeno_almoco: tr.querySelector('.pa').checked,
-      almoco: tr.querySelector('.al').checked,
-      jantar: tr.querySelector('.ja').checked,
-      deitar: tr.querySelector('.de').checked
+      almoco:         tr.querySelector('.al').checked,
+      jantar:         tr.querySelector('.ja').checked,
+      deitar:         tr.querySelector('.de').checked
     });
   });
   return meds;
+}
+
+// Datalist — gerado a partir de MEDICAMENTOS
+function criarDatalist() {
+  var dl = document.createElement('datalist');
+  dl.id  = 'med-list';
+  MED_NOMES.forEach(function(n) {
+    var opt = document.createElement('option');
+    opt.value = n;
+    dl.appendChild(opt);
+  });
+  document.body.appendChild(dl);
 }
 
 // ── Validação ─────────────────────────────────────────────────────────────
@@ -381,10 +372,8 @@ function validar() {
 // ── Submissão ─────────────────────────────────────────────────────────────
 function submeter() {
   var erros = validar();
-  if (erros.length) {
-    alert('Por favor preencha:\n• ' + erros.join('\n• '));
-    return;
-  }
+  if (erros.length) { alert('Por favor preencha:\n• ' + erros.join('\n• ')); return; }
+
   var q6 = document.querySelector('input[name="q6"]:checked').value;
   var dados = {
     token:      TOKEN,
@@ -432,6 +421,9 @@ function submeter() {
     mer.style.display = 'block';
   });
 }
+
+// Criar datalist ao carregar
+criarDatalist();
 </script>
 </body>
 </html>
