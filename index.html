@@ -36,7 +36,6 @@ header p{font-size:13px;opacity:.82;line-height:1.55;max-width:460px}
 .ql{font-size:13px;font-weight:600;color:var(--td);margin-bottom:4px}
 .qt{font-size:13px;line-height:1.6;color:var(--text);margin-bottom:10px}
 .qt ul{margin:6px 0 0 16px}.qt li{margin-bottom:2px}
-.qh{font-size:11px;color:var(--muted);font-style:italic;margin-bottom:10px}
 .rg{display:flex;gap:10px}
 .rb{flex:1}.rb input[type=radio]{display:none}
 .rb label{display:block;text-align:center;padding:10px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;transition:all .15s;color:var(--muted);background:var(--white)}
@@ -202,7 +201,6 @@ function construirFormulario() {
   html += '<li>Hipertensão pulmonar</li>';
   html += '<li>Pacemaker ou cardiodesfibrilhador implantado que necessite de ser desactivado antes de procedimentos</li>';
   html += '</ul></div>';
-  html += '<div class="qh">Base: RCRI + ASA Physical Status ≥ III</div>';
   html += '<div class="rg"><div class="rb"><input type="radio" name="q1" id="q1s" value="Sim"><label for="q1s" class="sim">Sim</label></div>';
   html += '<div class="rb"><input type="radio" name="q1" id="q1n" value="Não"><label for="q1n" class="nao">Não</label></div></div></div>';
 
@@ -212,14 +210,12 @@ function construirFormulario() {
   html += '<li>Apneia do sono grave com má tolerância ou má adesão ao CPAP/BiPAP</li>';
   html += '<li>Antecedentes documentados de intubação difícil ou via aérea difícil em anestesia anterior</li>';
   html += '</ul></div>';
-  html += '<div class="qh">Base: STOP-BANG — principal preditor de hipoxemia em endoscopia sedada</div>';
   html += '<div class="rg"><div class="rb"><input type="radio" name="q2" id="q2s" value="Sim"><label for="q2s" class="sim">Sim</label></div>';
   html += '<div class="rb"><input type="radio" name="q2" id="q2n" value="Não"><label for="q2n" class="nao">Não</label></div></div></div>';
 
   // Q3
   html += '<div class="q"><div class="ql">Q3 — Peso e Altura</div>';
   html += '<div class="qt">Indique o seu peso e altura. O IMC será calculado automaticamente.</div>';
-  html += '<div class="qh">Base: IMC > 40 é factor independente de risco em endoscopia sedada</div>';
   html += '<div class="fr" style="margin-top:10px">';
   html += '<div class="f"><label>Peso (kg)</label><input type="number" id="q3peso" placeholder="Ex: 85" min="20" max="300" oninput="calcImc()"></div>';
   html += '<div class="f"><label>Altura (cm)</label><input type="number" id="q3altura" placeholder="Ex: 170" min="100" max="250" oninput="calcImc()"></div>';
@@ -233,7 +229,6 @@ function construirFormulario() {
   html += '<li>Anticoagulantes que não podem ser suspensos antes do procedimento (válvula cardíaca mecânica, trombose venosa ou pulmonar recentes, arritmia caracterizada pelo cardiologista como grave)</li>';
   html += '<li>Doença hemorrágica conhecida (hemofilia, trombocitopenia grave)</li>';
   html += '</ul></div>';
-  html += '<div class="qh">Base: altera farmacocinética dos sedativos; relevante em biópsia ou polipectomia</div>';
   html += '<div class="rg"><div class="rb"><input type="radio" name="q4" id="q4s" value="Sim"><label for="q4s" class="sim">Sim</label></div>';
   html += '<div class="rb"><input type="radio" name="q4" id="q4n" value="Não"><label for="q4n" class="nao">Não</label></div></div></div>';
 
@@ -244,7 +239,6 @@ function construirFormulario() {
   html += '<li>Alergia confirmada a anestésicos</li>';
   html += '<li>Doença muscular ou neurológica grave: miastenia gravis, distrofia muscular, ELA, Parkinson avançado</li>';
   html += '</ul></div>';
-  html += '<div class="qh">Base: hipertermia maligna e doenças neuromusculares exigem planeamento específico</div>';
   html += '<div class="rg"><div class="rb"><input type="radio" name="q5" id="q5s" value="Sim"><label for="q5s" class="sim">Sim</label></div>';
   html += '<div class="rb"><input type="radio" name="q5" id="q5n" value="Não"><label for="q5n" class="nao">Não</label></div></div></div>';
 
